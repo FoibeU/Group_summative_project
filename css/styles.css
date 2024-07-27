@@ -674,6 +674,12 @@ legend + * {
     flex: 0 0 auto;
     width: 16.66666667%;
   }
+  .alert-date {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
   .col-xxl-3 {
     flex: 0 0 auto;
     width: 25%;

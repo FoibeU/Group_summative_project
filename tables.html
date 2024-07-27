@@ -11,68 +11,85 @@
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <script>
-            document.addEventListener('DOMContentLoaded', (event) => {
-    const roomData = [
-        { room: 'Room 1', type: 'Single', status: 'vacant', resident: '-', amenities: 'Wi-Fi, AC' },
-        { room: 'Room 2', type: 'Double', status: 'occupied', resident: 'John Doe', amenities: 'Wi-Fi, AC, TV' },
-        { room: 'Room 3', type: 'Single', status: 'maintenance', resident: '-', amenities: 'Wi-Fi, AC' },
-        { room: 'Room 4', type: 'Single', status: 'vacant', resident: '-', amenities: 'Wi-Fi, AC' },
-        { room: 'Room 5', type: 'Double', status: 'occupied', resident: 'Jane Smith', amenities: 'Wi-Fi, AC, TV' },
-        { room: 'Room 6', type: 'Single', status: 'maintenance', resident: '-', amenities: 'Wi-Fi, AC' },
-        { room: 'Room 7', type: 'Single', status: 'vacant', resident: '-', amenities: 'Wi-Fi, AC' },
-        { room: 'Room 8', type: 'Single', status: 'vacant', resident: '-', amenities: 'Wi-Fi, AC' },
-        { room: 'Room 9', type: 'Single', status: 'occupied', resident: '-', amenities: 'Wi-Fi, AC' },
-        { room: 'Room 10', type: 'Single', status: 'occupied', resident: '-', amenities: 'Wi-Fi, AC' },
-        { room: 'Room 11', type: 'Single', status: 'maintenance', resident: '-', amenities: 'Wi-Fi, AC' },
-    ];
+          
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Default room data or fetch from local storage
+            const roomData = JSON.parse(localStorage.getItem('roomData')) || [
+                { room: 'Room 1', type: 'Single', status: 'vacant', resident: '-', amenities: 'Wi-Fi, AC' },
+                { room: 'Room 2', type: 'Double', status: 'occupied', resident: 'Foibe Uwizeye', amenities: 'Wi-Fi, AC, TV' },
+                { room: 'Room 3', type: 'Single', status: 'maintenance', resident: 'N/A', amenities: 'Wi-Fi, AC' },
+                { room: 'Room 4', type: 'Double', status: 'occupied', resident: 'Joselyne', amenities: 'Wi-Fi, AC, TV' },
+                { room: 'Room 5', type: 'Single', status: 'maintenance', resident: 'N/A', amenities: 'Wi-Fi, AC' },
+                { room: 'Room 6', type: 'Double', status: 'occupied', resident: 'Foibe Uwizeye', amenities: 'Wi-Fi, AC, TV' },
+                { room: 'Room 7', type: 'Suite', status: 'maintenance', resident: 'N/A', amenities: 'Wi-Fi, AC' },
+                { room: 'Room 8', type: 'Double', status: 'occupied', resident: 'Ange Marie', amenities: 'Wi-Fi, AC, TV' },
+                { room: 'Room 9', type: 'Single', status: 'maintenance', resident: 'N/A', amenities: 'Wi-Fi, AC' },
+                { room: 'Room 10', type: 'Suite', status: 'vacant', resident: '-', amenities: 'Wi-Fi, AC, TV' }
+            ];
 
-    const tableBody = document.querySelector('#datatablesSimple tbody');
-    const roomFilter = document.getElementById('roomFilter');
-    const statusFilter = document.getElementById('statusFilter');
+            // Get references to DOM elements
+            const tableBody = document.querySelector('#datatablesSimple tbody');
+            const roomFilter = document.getElementById('roomFilter');
+            const statusFilter = document.getElementById('statusFilter');
+            const addRoomForm = document.getElementById('addRoomForm');
 
-    function renderTable(data) {
-        tableBody.innerHTML = '';
-        data.forEach(row => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${row.room}</td>
-                <td>${row.type}</td>
-                <td class="${row.status}">${row.status.charAt(0).toUpperCase() + row.status.slice(1)}</td>
-                <td>${row.resident}</td>
-                <td>${row.amenities}</td>
-            `;
-            tableBody.appendChild(tr);
+            // Render table with provided data
+            function renderTable(data) {
+                tableBody.innerHTML = ''; // Clear existing rows
+                data.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${row.room}</td>
+                        <td>${row.type}</td>
+                        <td class="${row.status}">${row.status.charAt(0).toUpperCase() + row.status.slice(1)}</td>
+                        <td>${row.resident}</td>
+                        <td>${row.amenities}</td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            }
+
+            // Filter table based on user input
+            function filterTable() {
+                const roomQuery = roomFilter.value.toLowerCase();
+                const statusQuery = statusFilter.value.toLowerCase();
+
+                // Filter data
+                const filteredData = roomData.filter(row => {
+                    const matchesRoom = row.room.toLowerCase().includes(roomQuery);
+                    const matchesStatus = statusQuery === '' || row.status.toLowerCase() === statusQuery;
+                    return matchesRoom && matchesStatus;
+                });
+
+                renderTable(filteredData); // Update table
+            }
+   // Function to  Handle form submission
+
+    addRoomForm.addEventListener('submit', (event) => {
+                event.preventDefault(); // Prevent default form submission
+
+                // Function to Create new room object
+                const newRoom = {
+                    room: document.getElementById('newRoomName').value,
+                    type: document.getElementById('newRoomType').value,
+                    status: document.getElementById('newRoomStatus').value,
+                    resident: document.getElementById('newRoomResident').value,
+                    amenities: document.getElementById('newRoomAmenities').value
+                };
+
+                roomData.push(newRoom); // Adding new room to data
+                localStorage.setItem('roomData', JSON.stringify(roomData)); // Update local storage
+                renderTable(roomData); // Refreshing table
+                addRoomForm.reset(); // Resetting form fields
+            });
+
+            // Adding event listeners for filters
+            roomFilter.addEventListener('input', filterTable);
+            statusFilter.addEventListener('change', filterTable);
+
+            // Initial render
+            renderTable(roomData);
         });
-    }
-
-    function filterTable() {
-        const roomQuery = roomFilter.value.toLowerCase();
-        const statusQuery = statusFilter.value.toLowerCase();
-
-        const filteredData = roomData.filter(row => {
-            const matchesRoom = row.room.toLowerCase().includes(roomQuery);
-            const matchesStatus = statusQuery === '' || row.status.toLowerCase() === statusQuery;
-            return matchesRoom && matchesStatus;
-        });
-
-        renderTable(filteredData);
-    }
-
-    function sortTable(columnIndex) {
-        const sortedData = [...roomData].sort((a, b) => {
-            const aValue = Object.values(a)[columnIndex].toLowerCase();
-            const bValue = Object.values(b)[columnIndex].toLowerCase();
-            return aValue.localeCompare(bValue);
-        });
-
-        renderTable(sortedData);
-    }
-
-    roomFilter.addEventListener('input', filterTable);
-    statusFilter.addEventListener('change', filterTable);
-
-    renderTable(roomData);
-});
 
         </script>
     </head>
@@ -125,7 +142,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <div class="card mb-4">
+                        <div class="card mb-4" style="background-color: rgb(196, 240, 255);">
                             <div class="card-header" style="color: blue ">
                                 <i class="fas fa-table me-1" style="align-content: center"></i>
                                 Room Management
@@ -144,6 +161,44 @@
                                         <option value="occupied">Occupied</option>
                                         <option value="maintenance">Maintenance</option>
                                     </select>
+                                </div>
+                                <!--Form to add a new room-->
+                                <div class="card mb-4" style="background-color:#009999">
+                                    <center><div class="card-header">
+                                       <i class="fas fa-plus me-1"></i>
+                                        Add New Room
+                                    </div></center> 
+                                    <div class="card-body" style="background-color: #49a29dcc;">
+                                        <form id="addRoomForm">
+                                            <div class="row g-2">
+                                                <div class="col-md-6">
+                                                    <label for="newRoomName" class="form-label">Room Name</label>
+                                                    <input type="text" class="form-control" id="newRoomName" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="newRoomType" class="form-label">Room Type</label>
+                                                    <input type="text" class="form-control" id="newRoomType" required>
+                                                </div>
+                                            </div>
+                                            <div class="row g-2">
+                                                <div class="col-md-6">
+                                                    <label for="newRoomStatus" class="form-label">Status</label>
+                                                    <input type="text" class="form-control" id="newRoomStatus" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="newRoomResident" class="form-label">Resident Info</label>
+                                                    <input type="text" class="form-control" id="newRoomResident">
+                                                </div>
+                                            </div>
+                                            <div class="row g-2">
+                                                <div class="col-md-12">
+                                                    <label for="newRoomAmenities" class="form-label">Amenities</label>
+                                                    <input type="text" class="form-control" id="newRoomAmenities">
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary mt-3">Add Room</button>
+                                        </form>
+                                    </div>
                                 </div>
                                 <!-- Sorting Options -->
                                
@@ -233,6 +288,6 @@
         <script src="js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
-        <script src="js/room-management.js"></script> <!-- Add your custom JavaScript file here -->
+        <script src="js/room-management.js"></script> 
     </body>
 </html>
