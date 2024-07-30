@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,8 +12,8 @@
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-    
 </head>
+
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand -->
@@ -24,7 +25,8 @@
         <!-- Navbar Search -->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
+                    aria-describedby="btnNavbarSearch" />
                 <button class="btn btn-primary" id="btnNavbarSearch" type="button">
                     <i class="fas fa-search"></i>
                 </button>
@@ -43,7 +45,8 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Alert and notifications
                         </a>
@@ -68,11 +71,14 @@
                 <div class="container-fluid px-4">
                     <!-- Image with Overlay Text -->
                     <div class="image-container">
-                        <img src="https://housing.unm.edu/residence-halls/images/buildings/src-apts-thumbnail-kg-web.png" alt="University Image" class="img-fluid">
+                        <img src="https://housing.unm.edu/residence-halls/images/buildings/src-apts-thumbnail-kg-web.png"
+                            alt="University Image" class="img-fluid">
                         <div class="overlay" style="background-color:#3399ff">
                             <div class="overlay-text">Here are Notifications</div>
                             <!-- Alerts and Notifications -->
                             <div id="alerts-container"></div>
+                            <!-- Buttons for managing notifications -->
+                            <button id="addNotificationBtn" class="btn btn-primary">Add Notification</button>
                         </div>
                     </div>
                 </div>
@@ -91,11 +97,48 @@
             </footer>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-   <script src="js/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
     <script src="js/theme.js"></script>
+    <script src="assets/charts/chart-pie-demo.js"></script>
+
+    <!-- Add Notification Functionality -->
+    <script>
+        $(document).ready(function () {
+            function addNotification(message) {
+                const notification = $('<div class="alert alert-info alert-dismissible fade show" role="alert"></div>')
+                    .text(message)
+                    .append('<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>');
+
+                $('#alerts-container').append(notification);
+            }
+
+            function editNotification(notification, newMessage) {
+                notification.text(newMessage)
+                    .append('<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>');
+            }
+
+            $('#addNotificationBtn').on('click', function () {
+                const message = prompt("Enter the notification message:");
+                if (message) {
+                    addNotification(message);
+                }
+            });
+
+            // Example of editing an existing notification
+            // $(document).on('dblclick', '.alert', function() {
+            //     const newMessage = prompt("Edit the notification message:", $(this).text());
+            //     if (newMessage) {
+            //         editNotification($(this), newMessage);
+            //     }
+            // });
+        });
+    </script>
 </body>
+
 </html>
