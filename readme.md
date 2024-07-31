@@ -3,7 +3,7 @@ Overview
 The University Residence Management System is a dashboard application designed to help university staff manage residence-related tasks. This includes functionalities like room management, maintenance requests, alerts, and notifications. The project utilizes local storage to save and retrieve data, ensuring persistence between sessions.
 
 
-Installation
+Installation or Usage
 Clone the repository:
 
 git clone https://github.com/FoibeU/Group_summative_project.git
