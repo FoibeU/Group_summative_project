@@ -12,7 +12,7 @@ Install dependencies:
 
 This project relies on some external libraries. Make sure to include them in your index.html file:
 
-the following libraries:
+Make sure you have the following libraries:
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Bootstrap CSS -->
