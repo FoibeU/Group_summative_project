@@ -97,22 +97,26 @@
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html">URMSS</a>
-        <!-- Sidebar Toggle-->
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
-                class="fas fa-bars"></i></button>
-        <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
-                    aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i
-                        class="fas fa-search"></i></button>
-            </div>
-        </form>
-        <!-- Theme Switcher-->
-        <button id="themeSwitcher" class="btn btn-outline-light">Switch Theme</button>
+        <!-- Navbar Brand -->
+        <a class="navbar-brand ps-3" href="index.html">URMS</a>
+        <div class="ms-auto d-flex align-items-center">
+            <!-- Navbar Search -->
+            <form class="d-none d-md-inline-block form-inline me-3">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
+                        aria-describedby="btnNavbarSearch" />
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+            <!-- Sidebar Toggle -->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
+                <i class="fas fa-bars"></i>
+            </button>
+            <!-- Theme Switcher -->
+            <button id="themeSwitcher" class="btn btn-outline-light">Switch Theme</button>
+        </div>
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -145,7 +149,7 @@
             </nav>
         </div>
         <div id="layoutSidenav_content">
-            <main>
+            <main style="margin-left:-20%">
                 <div class="container-fluid px-4">
                     <div class="card mb-4 " style="background-color: gainsboro;">
                         <div class="card-header" style="color: blue ">
@@ -237,47 +241,48 @@
                             </table>
                         </div>
                     </div>
-                    <div class="card mb-4" style="background-color:#009999">
-                        <center>
-                            <div class="card-header">
-                                <i class="fas fa-plus me-1"></i>
-                                Add New Room
-                            </div>
-                        </center>
-                        <div class="card-body" style="background-color: #49a29dcc;">
-                            <form id="addRoomForm">
-                                <div class="row g-2">
-                                    <div class="col-md-6">
-                                        <label for="newRoomName" class="form-label">Room Name</label>
-                                        <input type="text" class="form-control" id="newRoomName" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="newRoomType" class="form-label">Room Type</label>
-                                        <input type="text" class="form-control" id="newRoomType" required>
-                                    </div>
-                                </div>
-                                <div class="row g-2">
-                                    <div class="col-md-6">
-                                        <label for="newRoomStatus" class="form-label">Status</label>
-                                        <input type="text" class="form-control" id="newRoomStatus" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="newRoomResident" class="form-label">Resident Info</label>
-                                        <input type="text" class="form-control" id="newRoomResident">
-                                    </div>
-                                </div>
-                                <div class="row g-2">
-                                    <div class="col-md-12">
-                                        <label for="newRoomAmenities" class="form-label">Amenities</label>
-                                        <input type="text" class="form-control" id="newRoomAmenities">
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary mt-3">Add Room</button>
-                            </form>
+                    
+    <div class="container mt-4">
+        <div class="card mb-4">
+            <center>
+                <div class="card-header">
+                    <i class="fas fa-plus me-1"></i>
+                    Add New Room
+                </div>
+            </center>
+            <div class="card-body">
+                <form id="addRoomForm">
+                    <div class="row g-2">
+                        <div class="col-md-6">
+                            <label for="newRoomName" class="form-label">Room Name</label>
+                            <input type="text" class="form-control" id="newRoomName" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="newRoomType" class="form-label">Room Type</label>
+                            <input type="text" class="form-control" id="newRoomType" required>
                         </div>
                     </div>
-                </div>
-
+                    <div class="row g-2">
+                        <div class="col-md-6">
+                            <label for="newRoomStatus" class="form-label">Status</label>
+                            <input type="text" class="form-control" id="newRoomStatus" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="newRoomResident" class="form-label">Resident Info</label>
+                            <input type="text" class="form-control" id="newRoomResident">
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-md-12">
+                            <label for="newRoomAmenities" class="form-label">Amenities</label>
+                            <input type="text" class="form-control" id="newRoomAmenities">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Add Room</button>
+                </form>
+            </div>
+        </div>
+    </div>
             </main>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
